@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(const MyApp());
@@ -47,7 +48,14 @@ class _DiceButton extends StatefulWidget {
 }
 
 class _DiceButtonState extends State<_DiceButton> {
-  var _diceNumber = 1;
+  final _random = Random();
+  late int _diceNumber;
+
+  @override
+  void initState() {
+    _diceNumber = _generateDiceNumber();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,11 +64,15 @@ class _DiceButtonState extends State<_DiceButton> {
         // Using TextButton instead of FlatButton because FlatButton was deprecated
         onPressed: () {
           setState(() {
-            _diceNumber = 2;
+            _diceNumber = _generateDiceNumber();
           });
         },
         child: Image.asset('images/dice$_diceNumber.png'),
       ),
     );
+  }
+
+  int _generateDiceNumber() {
+    return 1 + _random.nextInt(5);
   }
 }
