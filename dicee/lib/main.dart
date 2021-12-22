@@ -31,19 +31,35 @@ class DicePage extends StatelessWidget {
     return Center(
       child: Row(
         children: [
-          diceButton('images/dice1.png'),
-          diceButton('images/dice2.png'),
+          _DiceButton(),
+          _DiceButton(),
         ],
       ),
     );
   }
+}
 
-  Widget diceButton(String imageName) {
+class _DiceButton extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _DiceButtonState();
+  }
+}
+
+class _DiceButtonState extends State<_DiceButton> {
+  var _diceNumber = 1;
+
+  @override
+  Widget build(BuildContext context) {
     return Expanded(
       child: TextButton(
         // Using TextButton instead of FlatButton because FlatButton was deprecated
-        onPressed: () {},
-        child: Image.asset(imageName),
+        onPressed: () {
+          setState(() {
+            _diceNumber = 2;
+          });
+        },
+        child: Image.asset('images/dice$_diceNumber.png'),
       ),
     );
   }
