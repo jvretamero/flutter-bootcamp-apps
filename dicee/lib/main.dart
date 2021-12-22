@@ -28,17 +28,23 @@ class DicePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        expandedAssetImage('images/dice1.png'),
-        expandedAssetImage('images/dice2.png'),
-      ],
+    return Center(
+      child: Row(
+        children: [
+          diceButton('images/dice1.png'),
+          diceButton('images/dice2.png'),
+        ],
+      ),
     );
   }
 
-  Widget expandedAssetImage(String imageName) {
+  Widget diceButton(String imageName) {
     return Expanded(
-      child: Image.asset(imageName),
+      child: TextButton(
+        // Using TextButton instead of FlatButton because FlatButton was deprecated
+        onPressed: () {},
+        child: Image.asset(imageName),
+      ),
     );
   }
 }
