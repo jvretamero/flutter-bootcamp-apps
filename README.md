@@ -13,3 +13,9 @@ This is the very first app build, it shows how Flutter apps are structured, some
 A business card as an app. This app covers some concepts of layout (columns and rows), custom fonts, Material icons and text styling.
 
 ![MiCard app screenshot](screenshots/micard.png)
+
+## Dicee
+
+A dice rolling app. This app covers the concept of stateless and stateful widgets.
+
+![Dicee app screenshot](screenshots/dicee.png)
