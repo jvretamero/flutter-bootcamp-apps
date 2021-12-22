@@ -72,7 +72,17 @@ class _DiceButtonState extends State<_DiceButton> {
     );
   }
 
-  int _generateDiceNumber() {
+  int _newRandomNumber() {
     return 1 + _random.nextInt(5);
+  }
+
+  int _generateDiceNumber() {
+    int newNumber = _diceNumber;
+
+    do {
+      newNumber = _newRandomNumber();
+    } while (newNumber == _diceNumber);
+
+    return newNumber;
   }
 }
