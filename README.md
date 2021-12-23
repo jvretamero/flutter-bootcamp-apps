@@ -19,3 +19,11 @@ A business card as an app. This app covers some concepts of layout (columns and 
 A dice rolling app. This app covers the concept of stateless and stateful widgets.
 
 ![Dicee app screenshot](screenshots/dicee.png)
+
+## Xylophone
+
+A music app. This app covers the concept of Flutter packages.
+
+This app uses the [audioplayers](https://pub.dev/packages/audioplayers) package.
+
+![Xylophone app screenshot](screenshots/xylophone.png)
