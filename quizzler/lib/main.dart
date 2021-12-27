@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quizzler/question.dart';
+import 'questions_controller.dart';
 
 void main() {
   runApp(const Quizzler());
@@ -35,27 +35,12 @@ class QuizPage extends StatefulWidget {
 }
 
 class QuizPageState extends State<QuizPage> {
-  final List<bool> _score = [];
-  final List<Question> _questions = [
-    Question(text: 'You can lead a cow down stairs but not up stairs.', answer: false),
-    Question(text: 'Approximately one quarter of human bones are in the feet.', answer: true),
-    Question(text: 'A slug\'s blood is green.', answer: true),
-  ];
+  late QuestionsController _controller;
 
-  int _currentQuestion = 0;
-
-  void _nextQuestion() {
-    _currentQuestion++;
-
-    if (_currentQuestion >= _questions.length) {
-      _currentQuestion = 0;
-    }
-  }
-
-  void _checkAnswer(bool answer) {
-    bool correctAnswer = _questions[_currentQuestion].answer;
-    bool isCorrect = answer == correctAnswer;
-    _score.add(isCorrect);
+  @override
+  void initState() {
+    _controller = QuestionsController();
+    super.initState();
   }
 
   @override
@@ -70,7 +55,7 @@ class QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10),
             child: Center(
               child: Text(
-                _questions[_currentQuestion].text,
+                _controller.questionText,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 25,
@@ -85,8 +70,7 @@ class QuizPageState extends State<QuizPage> {
           color: Colors.green,
           onPressed: () {
             setState(() {
-              _checkAnswer(true);
-              _nextQuestion();
+              _controller.checkAnswer(true);
             });
           },
         ),
@@ -95,14 +79,13 @@ class QuizPageState extends State<QuizPage> {
           color: Colors.red,
           onPressed: () {
             setState(() {
-              _checkAnswer(false);
-              _nextQuestion();
+              _controller.checkAnswer(false);
             });
           },
         ),
         //TODO: prevent overflow
         Row(
-            children: _score
+            children: _controller.score
                 .map((isTrue) => Icon(
                       isTrue ? Icons.check : Icons.close,
                       color: isTrue ? Colors.green : Colors.red,
