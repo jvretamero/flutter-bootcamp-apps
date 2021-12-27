@@ -106,14 +106,15 @@ class QuizPageState extends State<QuizPage> {
             _checkAnswer(context, false);
           },
         ),
-        //TODO: prevent overflow
-        Row(
-            children: _controller.score
-                .map((isTrue) => Icon(
-                      isTrue ? Icons.check : Icons.close,
-                      color: isTrue ? Colors.green : Colors.red,
-                    ))
-                .toList())
+        Wrap(
+          direction: Axis.horizontal,
+          children: _controller.score
+              .map((isTrue) => Icon(
+                    isTrue ? Icons.check : Icons.close,
+                    color: isTrue ? Colors.green : Colors.red,
+                  ))
+              .toList(),
+        )
       ],
     );
   }
