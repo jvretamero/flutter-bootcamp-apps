@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'story_controller.dart';
+
 void main() {
   runApp(const Destini());
 }
@@ -10,8 +12,9 @@ class Destini extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home: StoryPage(),
+      home: const StoryPage(),
     );
   }
 }
@@ -26,6 +29,14 @@ class StoryPage extends StatefulWidget {
 }
 
 class _StoryPageState extends State<StoryPage> {
+  late StoryController _controller;
+
+  @override
+  void initState() {
+    _controller = StoryController();
+    super.initState();
+  }
+
   Widget _choiceButton(String text, Color color, Function() onPressed) {
     return ElevatedButton(
       onPressed: onPressed,
@@ -37,6 +48,14 @@ class _StoryPageState extends State<StoryPage> {
         ),
       ),
     );
+  }
+
+  Function() onChoice(int choiceNumber) {
+    return () {
+      setState(() {
+        _controller.nextStory(choiceNumber);
+      });
+    };
   }
 
   @override
@@ -58,7 +77,7 @@ class _StoryPageState extends State<StoryPage> {
                 flex: 12,
                 child: Center(
                   child: Text(
-                    'Story text will go here',
+                    _controller.currentStory.storyTitle,
                     style: const TextStyle(
                       fontSize: 25,
                     ),
@@ -68,18 +87,21 @@ class _StoryPageState extends State<StoryPage> {
               Expanded(
                 flex: 2,
                 child: _choiceButton(
-                  'Choice 1',
+                  _controller.currentStory.choice1,
                   Colors.red,
-                  () {},
+                  onChoice(1),
                 ),
               ),
               const SizedBox(height: 20),
-              Expanded(
-                flex: 2,
-                child: _choiceButton(
-                  'Choice 1',
-                  Colors.blue,
-                  () {},
+              Visibility(
+                visible: _controller.buttonShuldBeVisible,
+                child: Expanded(
+                  flex: 2,
+                  child: _choiceButton(
+                    _controller.currentStory.choice2,
+                    Colors.blue,
+                    onChoice(2),
+                  ),
                 ),
               )
             ],
