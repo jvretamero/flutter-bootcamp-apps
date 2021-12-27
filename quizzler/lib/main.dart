@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizzler/question.dart';
 
 void main() {
   runApp(const Quizzler());
@@ -35,15 +36,10 @@ class QuizPage extends StatefulWidget {
 
 class QuizPageState extends State<QuizPage> {
   final List<bool> _score = [];
-  final List<String> _questions = [
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.',
-  ];
-  final List<bool> _answers = [
-    false,
-    true,
-    true,
+  final List<Question> _questions = [
+    Question(text: 'You can lead a cow down stairs but not up stairs.', answer: false),
+    Question(text: 'Approximately one quarter of human bones are in the feet.', answer: true),
+    Question(text: 'A slug\'s blood is green.', answer: true),
   ];
 
   int _currentQuestion = 0;
@@ -57,7 +53,7 @@ class QuizPageState extends State<QuizPage> {
   }
 
   void _checkAnswer(bool answer) {
-    bool correctAnswer = _answers[_currentQuestion];
+    bool correctAnswer = _questions[_currentQuestion].answer;
     bool isCorrect = answer == correctAnswer;
     _score.add(isCorrect);
   }
@@ -74,7 +70,7 @@ class QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10),
             child: Center(
               child: Text(
-                _questions[_currentQuestion],
+                _questions[_currentQuestion].text,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 25,
@@ -104,6 +100,7 @@ class QuizPageState extends State<QuizPage> {
             });
           },
         ),
+        //TODO: prevent overflow
         Row(
             children: _score
                 .map((isTrue) => Icon(
