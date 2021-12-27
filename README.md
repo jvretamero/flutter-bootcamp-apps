@@ -35,3 +35,9 @@ A quiz app. This app covers some Object Oriented Programming concepts with Dart 
 > During the course it was suggested to use the [rflutter_alert](https://pub.dev/packages/rflutter_alert) package, but I decided to use the native `AlertDialog` class
 
 ![Quizzler app screenshot](screenshots/quizzler.png)
+
+## Destini
+
+A choose your own adventure game. This app is really similar to `Quizzler`, but it was made as a challenge instead of a step-by-step guide.
+
+![Destini app screenshot](screenshots/destini.png)
