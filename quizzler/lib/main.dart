@@ -35,6 +35,21 @@ class QuizPage extends StatefulWidget {
 
 class QuizPageState extends State<QuizPage> {
   final List<bool> _score = [];
+  final List<String> _questions = [
+    'You can lead a cow down stairs but not up stairs.',
+    'Approximately one quarter of human bones are in the feet.',
+    'A slug\'s blood is green.',
+  ];
+
+  int _currentQuestion = 0;
+
+  void _nextQuestion() {
+    _currentQuestion++;
+
+    if (_currentQuestion >= _questions.length) {
+      _currentQuestion = 0;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,15 +57,15 @@ class QuizPageState extends State<QuizPage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Expanded(
+        Expanded(
           flex: 5,
           child: Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Center(
               child: Text(
-                'This is where the question text will go',
+                _questions[_currentQuestion],
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 25,
                   color: Colors.white,
                 ),
@@ -58,8 +73,24 @@ class QuizPageState extends State<QuizPage> {
             ),
           ),
         ),
-        _answerButton('True', Colors.green),
-        _answerButton('False', Colors.red),
+        _answerButton(
+          text: 'True',
+          color: Colors.green,
+          onPressed: () {
+            setState(() {
+              _nextQuestion();
+            });
+          },
+        ),
+        _answerButton(
+          text: 'False',
+          color: Colors.red,
+          onPressed: () {
+            setState(() {
+              _nextQuestion();
+            });
+          },
+        ),
         Row(
             children: _score
                 .map((isTrue) => Icon(
@@ -71,13 +102,17 @@ class QuizPageState extends State<QuizPage> {
     );
   }
 
-  Widget _answerButton(String text, Color color) {
+  Widget _answerButton({
+    required String text,
+    required Color color,
+    required Function() onPressed,
+  }) {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(15),
         child: RawMaterialButton(
           fillColor: color,
-          onPressed: () {},
+          onPressed: onPressed,
           child: Text(
             text,
             style: const TextStyle(
