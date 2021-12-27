@@ -10,6 +10,7 @@ class Quizzler extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.grey.shade900,
         body: const SafeArea(
@@ -33,6 +34,8 @@ class QuizPage extends StatefulWidget {
 }
 
 class QuizPageState extends State<QuizPage> {
+  final List<bool> _score = [];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -57,6 +60,13 @@ class QuizPageState extends State<QuizPage> {
         ),
         _answerButton('True', Colors.green),
         _answerButton('False', Colors.red),
+        Row(
+            children: _score
+                .map((isTrue) => Icon(
+                      isTrue ? Icons.check : Icons.close,
+                      color: isTrue ? Colors.green : Colors.red,
+                    ))
+                .toList())
       ],
     );
   }
