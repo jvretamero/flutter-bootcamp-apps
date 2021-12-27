@@ -41,3 +41,9 @@ A quiz app. This app covers some Object Oriented Programming concepts with Dart 
 A choose your own adventure game. This app is really similar to `Quizzler`, but it was made as a challenge instead of a step-by-step guide.
 
 ![Destini app screenshot](screenshots/destini.png)
+
+## BMI Calculator
+
+An app that calculates your BMI.
+
+> This project was based on the [Ruben Vaalt design](https://dribbble.com/shots/4585382-Simple-BMI-Calculator)
