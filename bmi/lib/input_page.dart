@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'bmi_theme.dart';
 import 'card_container.dart';
 
 class InputPage extends StatefulWidget {
@@ -13,7 +14,7 @@ class _InputPageState extends State<InputPage> {
   Widget _card() {
     return Expanded(
       child: CardContainer(
-        color: const Color(0xFF1D1E33),
+        color: BMITheme.primaryLightColor,
         child: Container(),
       ),
     );
