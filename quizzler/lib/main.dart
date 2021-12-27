@@ -40,6 +40,11 @@ class QuizPageState extends State<QuizPage> {
     'Approximately one quarter of human bones are in the feet.',
     'A slug\'s blood is green.',
   ];
+  final List<bool> _answers = [
+    false,
+    true,
+    true,
+  ];
 
   int _currentQuestion = 0;
 
@@ -49,6 +54,12 @@ class QuizPageState extends State<QuizPage> {
     if (_currentQuestion >= _questions.length) {
       _currentQuestion = 0;
     }
+  }
+
+  void _checkAnswer(bool answer) {
+    bool correctAnswer = _answers[_currentQuestion];
+    bool isCorrect = answer == correctAnswer;
+    _score.add(isCorrect);
   }
 
   @override
@@ -78,6 +89,7 @@ class QuizPageState extends State<QuizPage> {
           color: Colors.green,
           onPressed: () {
             setState(() {
+              _checkAnswer(true);
               _nextQuestion();
             });
           },
@@ -87,6 +99,7 @@ class QuizPageState extends State<QuizPage> {
           color: Colors.red,
           onPressed: () {
             setState(() {
+              _checkAnswer(false);
               _nextQuestion();
             });
           },
