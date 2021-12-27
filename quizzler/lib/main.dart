@@ -50,6 +50,7 @@ class QuizPageState extends State<QuizPage> {
       if (_controller.isFinished) {
         showDialog(
           context: context,
+          barrierDismissible: false,
           builder: (_) => AlertDialog(
             title: const Text('Congratulations!'),
             content: const Text('You have reached the end of the quiz'),
