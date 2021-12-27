@@ -27,3 +27,11 @@ A music app. This app covers the concept of Flutter packages.
 This app uses the [audioplayers](https://pub.dev/packages/audioplayers) package.
 
 ![Xylophone app screenshot](screenshots/xylophone.png)
+
+## Quizzler
+
+A quiz app. This app covers some Object Oriented Programming concepts with Dart and code organization.
+
+> During the course it was suggested to use the [rflutter_alert](https://pub.dev/packages/rflutter_alert) package, but I decided to use the native `AlertDialog` class
+
+![Quizzler app screenshot](screenshots/quizzler.png)
