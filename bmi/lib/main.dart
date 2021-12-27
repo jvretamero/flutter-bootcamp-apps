@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'input_page.dart';
 
@@ -11,6 +12,8 @@ class BMICalculator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
