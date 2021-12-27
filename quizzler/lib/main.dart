@@ -43,6 +43,33 @@ class QuizPageState extends State<QuizPage> {
     super.initState();
   }
 
+  void _checkAnswer(BuildContext context, bool answer) {
+    setState(() {
+      _controller.checkAnswer(answer);
+
+      if (_controller.isFinished) {
+        showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            title: const Text('Congratulations!'),
+            content: const Text('You have reached the end of the quiz'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  setState(() {
+                    _controller.reset();
+                  });
+                },
+                child: const Text('Do it again'),
+              ),
+            ],
+          ),
+        );
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -69,18 +96,14 @@ class QuizPageState extends State<QuizPage> {
           text: 'True',
           color: Colors.green,
           onPressed: () {
-            setState(() {
-              _controller.checkAnswer(true);
-            });
+            _checkAnswer(context, true);
           },
         ),
         _answerButton(
           text: 'False',
           color: Colors.red,
           onPressed: () {
-            setState(() {
-              _controller.checkAnswer(false);
-            });
+            _checkAnswer(context, false);
           },
         ),
         //TODO: prevent overflow

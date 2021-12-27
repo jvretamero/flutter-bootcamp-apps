@@ -8,16 +8,17 @@ class QuestionsController {
     Question(text: 'A slug\'s blood is green.', answer: true),
   ];
   int _currentQuestion = 0;
+  bool _isFinished = false;
 
   String get questionText => _questions[_currentQuestion].text;
-
   Iterable<bool> get score => List.unmodifiable(_score);
+  bool get isFinished => _isFinished;
 
   void _nextQuestion() {
-    _currentQuestion++;
-
-    if (_currentQuestion >= _questions.length) {
-      _currentQuestion = 0;
+    if (_currentQuestion + 1 >= _questions.length) {
+      _isFinished = true;
+    } else {
+      _currentQuestion++;
     }
   }
 
@@ -28,5 +29,11 @@ class QuestionsController {
     _score.add(isCorrect);
 
     _nextQuestion();
+  }
+
+  void reset() {
+    _score.clear();
+    _isFinished = false;
+    _currentQuestion = 0;
   }
 }
