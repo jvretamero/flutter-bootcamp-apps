@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'bmi_theme.dart';
 import 'card_container.dart';
 import 'icon_content.dart';
 
@@ -13,10 +12,9 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Widget _card({Widget? child}) {
+  Widget _card({required Widget child}) {
     return Expanded(
       child: CardContainer(
-        color: BMITheme.primaryLightColor,
         child: child,
       ),
     );
@@ -48,12 +46,12 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          _card(),
+          _card(child: Container()),
           Expanded(
             child: Row(
               children: [
-                _card(),
-                _card(),
+                _card(child: Container()),
+                _card(child: Container()),
               ],
             ),
           ),
