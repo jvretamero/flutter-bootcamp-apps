@@ -2,36 +2,31 @@ import 'package:flutter/material.dart';
 
 import 'bmi_theme.dart';
 
-class CardContainer extends StatefulWidget {
+class CardContainer extends StatelessWidget {
   final Widget child;
+  final bool? isSelected;
+  final Function? onSelected;
 
   const CardContainer({
     Key? key,
     required this.child,
+    this.isSelected,
+    this.onSelected,
   }) : super(key: key);
-
-  @override
-  State<CardContainer> createState() => _CardContainerState();
-}
-
-class _CardContainerState extends State<CardContainer> {
-  bool _isSelected = false;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        setState(() {
-          _isSelected = !_isSelected;
-        });
+        onSelected?.call();
       },
       child: Container(
         margin: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-          color: _isSelected ? BMITheme.activeCardColor : BMITheme.inactiveCardColor,
+          color: (isSelected ?? true) ? BMITheme.activeCardColor : BMITheme.inactiveCardColor,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: widget.child,
+        child: child,
       ),
     );
   }
