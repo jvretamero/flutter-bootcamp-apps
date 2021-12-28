@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'bmi_theme.dart';
+
 class CardContainer extends StatelessWidget {
   final Widget? child;
   final Color? color;
@@ -15,7 +17,7 @@ class CardContainer extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: color,
+        color: color ?? BMITheme.primaryColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: child,
