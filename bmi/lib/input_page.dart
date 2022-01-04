@@ -21,6 +21,7 @@ class _InputPageState extends State<InputPage> {
   late Gender selectedGender;
   late double height;
   late int weight;
+  late int age;
 
   Widget _genderCard({
     required Gender gender,
@@ -54,6 +55,7 @@ class _InputPageState extends State<InputPage> {
     selectedGender = Gender.male;
     height = minHeight;
     weight = 0;
+    age = 0;
 
     super.initState();
   }
@@ -167,7 +169,43 @@ class _InputPageState extends State<InputPage> {
                     ],
                   ),
                 ),
-                _card(child: Container()),
+                _card(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'AGE',
+                        style: BMITheme.labelTextStyle,
+                      ),
+                      Text(
+                        age.toString(),
+                        style: BMITheme.numberTextStyle,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RoundIconButton(
+                            icon: Icons.add,
+                            onPressed: () {
+                              setState(() {
+                                age++;
+                              });
+                            },
+                          ),
+                          const SizedBox(width: 10),
+                          RoundIconButton(
+                            icon: Icons.remove,
+                            onPressed: () {
+                              setState(() {
+                                age--;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
