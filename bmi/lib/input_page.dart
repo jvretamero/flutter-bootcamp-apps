@@ -6,6 +6,7 @@ import 'card_container.dart';
 import 'gender.dart';
 import 'icon_content.dart';
 import 'number_selector.dart';
+import 'results_page.dart';
 import 'round_icon_button.dart';
 
 class InputPage extends StatefulWidget {
@@ -160,6 +161,29 @@ class _InputPageState extends State<InputPage> {
                   ),
                 ),
               ],
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ResultsPage(),
+                ),
+              );
+            },
+            child: Container(
+              child: const Center(
+                child: Text(
+                  'CALCULATE',
+                  style: BMITheme.largeButtonTextStyle,
+                ),
+              ),
+              color: BMITheme.bottomButtonColor,
+              margin: const EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(bottom: 20),
+              width: double.infinity,
+              height: 80,
             ),
           ),
         ],

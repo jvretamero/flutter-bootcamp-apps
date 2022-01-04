@@ -14,6 +14,8 @@ class BMITheme {
   static const sliderInactiveColor = Color(0xFF8D8E98);
   static const sliderThumbColor = accentColor;
 
+  static const bottomButtonColor = accentColor;
+
   static const labelTextStyle = TextStyle(
     fontSize: 18,
     color: textColor,
@@ -22,6 +24,11 @@ class BMITheme {
   static const numberTextStyle = TextStyle(
     fontSize: 50,
     fontWeight: FontWeight.w900,
+  );
+
+  static const largeButtonTextStyle = TextStyle(
+    fontSize: 25,
+    fontWeight: FontWeight.bold,
   );
 
   static SliderThemeData sliderTheme(BuildContext context) => SliderTheme.of(context).copyWith(
