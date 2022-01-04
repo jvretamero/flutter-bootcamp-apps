@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 //import 'package:flutter/services.dart';
 
 import 'bmi_theme.dart';
-import 'input_page.dart';
+import 'pages/input_page.dart';
 
 void main() {
   runApp(const BMICalculator());
