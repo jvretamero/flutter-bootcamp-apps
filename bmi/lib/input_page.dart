@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'bmi_theme.dart';
 import 'card_container.dart';
 import 'gender.dart';
 import 'icon_content.dart';
@@ -70,7 +71,16 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          _card(child: Container()),
+          _card(
+            child: Column(
+              children: const [
+                Text(
+                  'HEIGHT',
+                  style: BMITheme.textStyle,
+                ),
+              ],
+            ),
+          ),
           Expanded(
             child: Row(
               children: [
