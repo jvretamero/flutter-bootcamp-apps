@@ -17,8 +17,15 @@ class ResultsPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Expanded(
-            child: Text('Your Result', style: BMITheme.titleTextStyle),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(15),
+              alignment: Alignment.bottomLeft,
+              child: const Text(
+                'Your Result',
+                style: BMITheme.titleTextStyle,
+              ),
+            ),
           ),
           Expanded(
             flex: 5,
@@ -26,8 +33,8 @@ class ResultsPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Text(
+                children: const [
+                  Text(
                     'Normal',
                     style: BMITheme.resultTextStyle,
                   ),
@@ -46,8 +53,10 @@ class ResultsPage extends StatelessWidget {
           ),
           Expanded(
             child: BottomButton(
-              text: 'RECALCULATE',
-              onTap: () {},
+              text: 'RE-CALCULATE',
+              onTap: () {
+                Navigator.pop(context);
+              },
             ),
           ),
         ],
