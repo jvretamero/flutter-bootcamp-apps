@@ -5,6 +5,7 @@ import 'bmi_theme.dart';
 import 'card_container.dart';
 import 'gender.dart';
 import 'icon_content.dart';
+import 'number_selector.dart';
 import 'round_icon_button.dart';
 
 class InputPage extends StatefulWidget {
@@ -133,77 +134,29 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 _card(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'WEIGHT',
-                        style: BMITheme.labelTextStyle,
-                      ),
-                      Text(
-                        weight.toString(),
-                        style: BMITheme.numberTextStyle,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          RoundIconButton(
-                            icon: Icons.add,
-                            onPressed: () {
-                              setState(() {
-                                weight++;
-                              });
-                            },
-                          ),
-                          const SizedBox(width: 10),
-                          RoundIconButton(
-                            icon: Icons.remove,
-                            onPressed: () {
-                              setState(() {
-                                weight--;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
+                  child: NumberSelector(
+                    label: 'WEIGHT',
+                    number: weight,
+                    min: 0,
+                    max: 300,
+                    onValue: (value) {
+                      setState(() {
+                        weight = value;
+                      });
+                    },
                   ),
                 ),
                 _card(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'AGE',
-                        style: BMITheme.labelTextStyle,
-                      ),
-                      Text(
-                        age.toString(),
-                        style: BMITheme.numberTextStyle,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          RoundIconButton(
-                            icon: Icons.add,
-                            onPressed: () {
-                              setState(() {
-                                age++;
-                              });
-                            },
-                          ),
-                          const SizedBox(width: 10),
-                          RoundIconButton(
-                            icon: Icons.remove,
-                            onPressed: () {
-                              setState(() {
-                                age--;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
+                  child: NumberSelector(
+                    label: 'AGE',
+                    number: age,
+                    min: 0,
+                    max: 110,
+                    onValue: (value) {
+                      setState(() {
+                        age = value;
+                      });
+                    },
                   ),
                 ),
               ],
