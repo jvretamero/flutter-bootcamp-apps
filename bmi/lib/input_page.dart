@@ -14,7 +14,11 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Gender selectedGender = Gender.male;
+  final double minHeight = 120;
+  final double maxHeight = 220;
+
+  late Gender selectedGender;
+  late double height;
 
   Widget _genderCard({
     required Gender gender,
@@ -44,12 +48,21 @@ class _InputPageState extends State<InputPage> {
   }
 
   @override
+  void initState() {
+    selectedGender = Gender.male;
+    height = minHeight;
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('BMI CALCULATOR'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             child: Row(
@@ -73,10 +86,39 @@ class _InputPageState extends State<InputPage> {
           ),
           _card(
             child: Column(
-              children: const [
-                Text(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
                   'HEIGHT',
-                  style: BMITheme.textStyle,
+                  style: BMITheme.labelTextStyle,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
+                  children: [
+                    Text(
+                      height.toStringAsFixed(0),
+                      style: BMITheme.numberTextStyle,
+                    ),
+                    const Text(
+                      'cm',
+                      style: BMITheme.labelTextStyle,
+                    ),
+                  ],
+                ),
+                Slider(
+                  value: height,
+                  min: minHeight,
+                  max: maxHeight,
+                  divisions: (maxHeight - minHeight).toInt(),
+                  activeColor: BMITheme.sliderActiveColor,
+                  inactiveColor: BMITheme.sliderInactiveColor,
+                  onChanged: (double value) {
+                    setState(() {
+                      height = value;
+                    });
+                  },
                 ),
               ],
             ),

@@ -24,7 +24,7 @@ class IconContent extends StatelessWidget {
         const SizedBox(height: 15),
         Text(
           text,
-          style: BMITheme.textStyle,
+          style: BMITheme.labelTextStyle,
         ),
       ],
     );
