@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'bmi_theme.dart';
+import 'bottom_button.dart';
 import 'card_container.dart';
 import 'gender.dart';
 import 'icon_content.dart';
@@ -163,7 +164,8 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          GestureDetector(
+          BottomButton(
+            text: 'CALCULATE',
             onTap: () {
               Navigator.push(
                 context,
@@ -172,19 +174,6 @@ class _InputPageState extends State<InputPage> {
                 ),
               );
             },
-            child: Container(
-              child: const Center(
-                child: Text(
-                  'CALCULATE',
-                  style: BMITheme.largeButtonTextStyle,
-                ),
-              ),
-              color: BMITheme.bottomButtonColor,
-              margin: const EdgeInsets.only(top: 10),
-              padding: const EdgeInsets.only(bottom: 20),
-              width: double.infinity,
-              height: 80,
-            ),
           ),
         ],
       ),
