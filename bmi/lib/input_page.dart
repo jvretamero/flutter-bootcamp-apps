@@ -19,6 +19,7 @@ class _InputPageState extends State<InputPage> {
 
   late Gender selectedGender;
   late double height;
+  late int weight;
 
   Widget _genderCard({
     required Gender gender,
@@ -47,10 +48,28 @@ class _InputPageState extends State<InputPage> {
     );
   }
 
+  Widget _iconButton(IconData icon, Function() onPressed) {
+    return RawMaterialButton(
+      elevation: 0,
+      shape: const CircleBorder(),
+      fillColor: BMITheme.buttonColor,
+      constraints: const BoxConstraints.tightFor(
+        width: 56,
+        height: 56,
+      ),
+      child: Icon(
+        icon,
+        color: Colors.white,
+      ),
+      onPressed: onPressed,
+    );
+  }
+
   @override
   void initState() {
     selectedGender = Gender.male;
     height = minHeight;
+    weight = 0;
 
     super.initState();
   }
@@ -127,7 +146,43 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: Row(
               children: [
-                _card(child: Container()),
+                _card(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'WEIGHT',
+                        style: BMITheme.labelTextStyle,
+                      ),
+                      Text(
+                        weight.toString(),
+                        style: BMITheme.numberTextStyle,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _iconButton(
+                            Icons.add,
+                            () {
+                              setState(() {
+                                weight++;
+                              });
+                            },
+                          ),
+                          const SizedBox(width: 10),
+                          _iconButton(
+                            Icons.remove,
+                            () {
+                              setState(() {
+                                weight--;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
                 _card(child: Container()),
               ],
             ),
