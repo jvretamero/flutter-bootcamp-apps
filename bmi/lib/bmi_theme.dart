@@ -20,4 +20,14 @@ class BMITheme {
     fontSize: 50,
     fontWeight: FontWeight.w900,
   );
+
+  static SliderThemeData sliderTheme(BuildContext context) => SliderTheme.of(context).copyWith(
+        trackHeight: 1,
+        activeTrackColor: Colors.white,
+        inactiveTrackColor: BMITheme.sliderInactiveColor,
+        thumbColor: BMITheme.sliderThumbColor,
+        overlayColor: BMITheme.sliderThumbColor.withAlpha(0x29),
+        thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 15),
+        overlayShape: const RoundSliderOverlayShape(overlayRadius: 30),
+      );
 }

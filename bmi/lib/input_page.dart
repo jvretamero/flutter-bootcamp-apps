@@ -108,15 +108,7 @@ class _InputPageState extends State<InputPage> {
                   ],
                 ),
                 SliderTheme(
-                  data: SliderTheme.of(context).copyWith(
-                    trackHeight: 1,
-                    activeTrackColor: Colors.white,
-                    inactiveTrackColor: BMITheme.sliderInactiveColor,
-                    thumbColor: BMITheme.sliderThumbColor,
-                    overlayColor: BMITheme.sliderThumbColor.withAlpha(0x29),
-                    thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 15),
-                    overlayShape: const RoundSliderOverlayShape(overlayRadius: 30),
-                  ),
+                  data: BMITheme.sliderTheme(context),
                   child: Slider(
                     value: height,
                     min: minHeight,
