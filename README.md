@@ -44,6 +44,8 @@ A choose your own adventure game. This app is really similar to `Quizzler`, but 
 
 ## BMI Calculator
 
-An app that calculates your BMI.
+An app that calculates your BMI. This app covers some code organization, Dart concepts, and widget design and refactoring.
 
 > This project was based on the [Ruben Vaalt design](https://dribbble.com/shots/4585382-Simple-BMI-Calculator)
+
+![BMI Calculator main screen](screenshots/bmi.png) ![BMI Calculator result screen](screenshots/bmi2.png)
