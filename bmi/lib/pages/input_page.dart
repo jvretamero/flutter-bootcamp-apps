@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../bmi_controller.dart';
 import '../bmi_theme.dart';
 import '../components/bottom_button.dart';
 import '../components/card_container.dart';
@@ -55,9 +56,9 @@ class _InputPageState extends State<InputPage> {
   @override
   void initState() {
     selectedGender = Gender.male;
-    height = minHeight;
-    weight = 0;
-    age = 0;
+    height = 180;
+    weight = 60;
+    age = 20;
 
     super.initState();
   }
@@ -166,10 +167,19 @@ class _InputPageState extends State<InputPage> {
           BottomButton(
             text: 'CALCULATE',
             onTap: () {
+              var controller = BMIController(
+                weight: weight,
+                height: height.toInt(),
+              );
+
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const ResultsPage(),
+                  builder: (context) => ResultsPage(
+                    bmi: controller.bmiAsText,
+                    result: controller.result,
+                    interpretation: controller.interpretation,
+                  ),
                 ),
               );
             },
