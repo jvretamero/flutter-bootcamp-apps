@@ -5,6 +5,7 @@ import 'bmi_theme.dart';
 import 'card_container.dart';
 import 'gender.dart';
 import 'icon_content.dart';
+import 'round_icon_button.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -45,23 +46,6 @@ class _InputPageState extends State<InputPage> {
       child: CardContainer(
         child: child,
       ),
-    );
-  }
-
-  Widget _iconButton(IconData icon, Function() onPressed) {
-    return RawMaterialButton(
-      elevation: 0,
-      shape: const CircleBorder(),
-      fillColor: BMITheme.buttonColor,
-      constraints: const BoxConstraints.tightFor(
-        width: 56,
-        height: 56,
-      ),
-      child: Icon(
-        icon,
-        color: Colors.white,
-      ),
-      onPressed: onPressed,
     );
   }
 
@@ -161,18 +145,18 @@ class _InputPageState extends State<InputPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          _iconButton(
-                            Icons.add,
-                            () {
+                          RoundIconButton(
+                            icon: Icons.add,
+                            onPressed: () {
                               setState(() {
                                 weight++;
                               });
                             },
                           ),
                           const SizedBox(width: 10),
-                          _iconButton(
-                            Icons.remove,
-                            () {
+                          RoundIconButton(
+                            icon: Icons.remove,
+                            onPressed: () {
                               setState(() {
                                 weight--;
                               });
