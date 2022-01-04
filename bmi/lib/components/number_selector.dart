@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'bmi_theme.dart';
+import '../bmi_theme.dart';
 import 'round_icon_button.dart';
 
 class NumberSelector extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'bmi_theme.dart';
+import '../bmi_theme.dart';
 
 class RoundIconButton extends StatelessWidget {
   final IconData icon;

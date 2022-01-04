@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'bmi_theme.dart';
+import '../bmi_theme.dart';
 
 class CardContainer extends StatelessWidget {
   final Widget child;

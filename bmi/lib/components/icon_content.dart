@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'bmi_theme.dart';
+import '../bmi_theme.dart';
 
 class IconContent extends StatelessWidget {
   final IconData icon;

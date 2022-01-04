@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'bmi_theme.dart';
-import 'bottom_button.dart';
-import 'card_container.dart';
+import 'components/bottom_button.dart';
+import 'components/card_container.dart';
 import 'gender.dart';
-import 'icon_content.dart';
-import 'number_selector.dart';
+import 'components/icon_content.dart';
+import 'components/number_selector.dart';
 import 'results_page.dart';
-import 'round_icon_button.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'bmi_theme.dart';
+import '../bmi_theme.dart';
 
 class BottomButton extends StatelessWidget {
   final String text;

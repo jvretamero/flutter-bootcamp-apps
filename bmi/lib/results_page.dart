@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'bmi_theme.dart';
-import 'bottom_button.dart';
-import 'card_container.dart';
+import 'components/bottom_button.dart';
+import 'components/card_container.dart';
 
 class ResultsPage extends StatelessWidget {
   const ResultsPage({Key? key}) : super(key: key);
