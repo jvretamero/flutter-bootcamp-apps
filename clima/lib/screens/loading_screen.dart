@@ -1,6 +1,6 @@
 import 'package:clima/services/location.dart';
+import 'package:clima/services/networking.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({Key? key}) : super(key: key);
@@ -20,11 +20,15 @@ class _LoadingScreenState extends State<LoadingScreen> {
     return Scaffold(
       body: Center(
         child: ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
             var location = Location();
             location.getCurrentLocation();
 
-            print('Location: ${location.latitude}, ${location.longitude}');
+            var apiKey = 'b2acc50dcb03e2e55c6326e72358a3ca';
+            var url = 'https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=$apiKey';
+
+            var networkHelper = NetworkHelper(url);
+            var data = await networkHelper.getData();
           },
           child: const Text('Get Location'),
         ),
