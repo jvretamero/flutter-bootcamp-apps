@@ -21,10 +21,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   void _getLocationData() async {
     var location = Location();
-    location.getCurrentLocation();
+    await location.getCurrentLocation();
 
     var apiKey = 'b2acc50dcb03e2e55c6326e72358a3ca';
-    var url = 'https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=$apiKey';
+    var url = 'https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=$apiKey&unit=metric';
 
     var networkHelper = NetworkHelper(url);
     var data = await networkHelper.getData();
@@ -33,7 +33,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
       context,
       MaterialPageRoute(
         builder: (BuildContext context) {
-          return const LocationScreen();
+          return LocationScreen(
+            locationWeather: data,
+          );
         },
       ),
     );

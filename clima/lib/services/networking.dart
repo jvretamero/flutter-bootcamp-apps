@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 
 class NetworkHelper {
@@ -12,7 +10,7 @@ class NetworkHelper {
     var response = await dio.get(_url);
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.data);
+      return response.data;
     }
   }
 }
