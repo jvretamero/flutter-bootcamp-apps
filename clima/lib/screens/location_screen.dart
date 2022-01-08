@@ -15,22 +15,27 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  late WeatherModel weatherModel;
   late double temperature;
   late String weatherIcon;
   late String cityName;
   late String message;
 
-  @override
-  void initState() {
-    super.initState();
-
+  void _updateUi(dynamic weatherData) {
     temperature = widget.locationWeather['main']['temp'];
     int condition = widget.locationWeather['weather'][0]['id'];
     cityName = widget.locationWeather['name'];
 
-    var weatherModel = WeatherModel();
     weatherIcon = weatherModel.getWeatherIcon(condition);
     message = weatherModel.getMessage(temperature.toInt());
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    weatherModel = WeatherModel();
+    _updateUi(widget.locationWeather);
   }
 
   @override
