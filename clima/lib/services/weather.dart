@@ -2,14 +2,24 @@ import 'location.dart';
 import 'networking.dart';
 
 class WeatherModel {
+  static const _apiKey = 'b2acc50dcb03e2e55c6326e72358a3ca';
+  static const _baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
+  static const _baseQuery = 'appid=$_apiKey&units=metric';
+
+  Future getCityWeather(String cityName) async {
+    var url = '$_baseUrl/?$_baseQuery&q=$cityName';
+
+    print(url);
+
+    var networkHelper = NetworkHelper(url);
+    return await networkHelper.getData();
+  }
+
   Future getLocationWeather() async {
     var location = Location();
     await location.getCurrentLocation();
 
-    print('Location: ${location.latitude} | ${location.longitude}');
-
-    var apiKey = 'b2acc50dcb03e2e55c6326e72358a3ca';
-    var url = 'https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=$apiKey&units=metric';
+    var url = '$_baseUrl/?$_baseQuery&lat=${location.latitude}&lon=${location.longitude}';
 
     print(url);
 
