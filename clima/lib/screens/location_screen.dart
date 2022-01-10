@@ -27,9 +27,9 @@ class _LocationScreenState extends State<LocationScreen> {
     print(weatherData);
 
     setState(() {
-      temperature = widget.locationWeather['main']['temp'];
-      int condition = widget.locationWeather['weather'][0]['id'];
-      cityName = widget.locationWeather['name'];
+      temperature = weatherData['main']['temp'];
+      int condition = weatherData['weather'][0]['id'];
+      cityName = weatherData['name'];
 
       weatherIcon = weatherModel.getWeatherIcon(condition);
       message = weatherModel.getMessage(temperature.toInt());
@@ -84,6 +84,11 @@ class _LocationScreenState extends State<LocationScreen> {
                           },
                         ),
                       );
+
+                      print(typedCityName);
+
+                      var data = await weatherModel.getCityWeather(typedCityName);
+                      _updateUi(data);
                     },
                     child: const Icon(
                       Icons.location_city,

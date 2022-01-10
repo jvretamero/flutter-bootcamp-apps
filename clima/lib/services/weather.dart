@@ -6,13 +6,12 @@ class WeatherModel {
   static const _baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
   static const _baseQuery = 'appid=$_apiKey&units=metric';
 
-  Future getCityWeather(String cityName) async {
+  Future getCityWeather(String cityName) {
     var url = '$_baseUrl/?$_baseQuery&q=$cityName';
 
     print(url);
 
-    var networkHelper = NetworkHelper(url);
-    return await networkHelper.getData();
+    return _getWeatherData(url);
   }
 
   Future getLocationWeather() async {
@@ -23,6 +22,10 @@ class WeatherModel {
 
     print(url);
 
+    return _getWeatherData(url);
+  }
+
+  Future _getWeatherData(String url) async {
     var networkHelper = NetworkHelper(url);
     return await networkHelper.getData();
   }
