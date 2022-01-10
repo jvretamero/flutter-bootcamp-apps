@@ -49,3 +49,9 @@ An app that calculates your BMI. This app covers some code organization, Dart co
 > This project was based on the [Ruben Vaalt design](https://dribbble.com/shots/4585382-Simple-BMI-Calculator)
 
 ![BMI Calculator main screen](screenshots/bmi.png) ![BMI Calculator result screen](screenshots/bmi2.png)
+
+## Clima
+
+A weather app. This apps covers more Dart concepts, networking and also navigation (which include passing data between screens).
+
+![Clima main screen](screenshots/clima1.png) ![Clima city screen](screenshots/clima2.png)
