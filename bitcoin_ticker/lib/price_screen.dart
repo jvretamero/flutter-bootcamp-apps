@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'coin_data.dart';
+
 class PriceScreen extends StatefulWidget {
   const PriceScreen({Key? key}) : super(key: key);
 
@@ -48,20 +50,11 @@ class _PriceScreenState extends State<PriceScreen> {
             color: Colors.lightBlue,
             child: DropdownButton<String>(
               value: selectedCurrency,
-              items: const [
-                DropdownMenuItem(
-                  child: Text('USD'),
-                  value: 'USD',
-                ),
-                DropdownMenuItem(
-                  child: Text('EUR'),
-                  value: 'EUR',
-                ),
-                DropdownMenuItem(
-                  child: Text('GBP'),
-                  value: 'GBP',
-                ),
-              ],
+              items: currenciesList
+                  .map(
+                    (currency) => DropdownMenuItem(child: Text(currency), value: currency),
+                  )
+                  .toList(),
               onChanged: (value) {
                 setState(() {
                   if (value?.isNotEmpty ?? false) {
