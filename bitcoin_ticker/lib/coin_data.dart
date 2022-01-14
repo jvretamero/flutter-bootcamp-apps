@@ -32,16 +32,27 @@ const List<String> cryptoList = [
 ];
 
 class CoinData {
-  Future<double> getExchangeRate(String from, String to) async {
-    var apiKey = dotenv.env['API_KEY'];
+  final String apiKey = dotenv.get('API_KEY', fallback: '');
 
+  Future<Map<String, double>> getExchangeRates(String selectedCurrency) async {
+    Map<String, double> rates = {};
+
+    for (String crypto in cryptoList) {
+      var rate = await _getExchangeRate(crypto, selectedCurrency);
+      rates[crypto] = rate;
+    }
+
+    return rates;
+  }
+
+  Future<double> _getExchangeRate(String from, String to) async {
     var url = 'https://rest.coinapi.io/v1/exchangerate/$from/$to?apikey=$apiKey';
     var response = await Dio().get(url);
 
     if (response.statusCode == 200) {
       return response.data['rate'];
     } else {
-      return 0.0;
+      return 0;
     }
   }
 }

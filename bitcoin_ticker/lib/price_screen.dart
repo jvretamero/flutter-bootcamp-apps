@@ -55,11 +55,9 @@ class _PriceScreenState extends State<PriceScreen> {
       selectedCurrency = value!;
     }
 
-    double fetchedRate = await CoinData().getExchangeRate('BTC', selectedCurrency);
+    print(await CoinData().getExchangeRates(selectedCurrency));
 
-    setState(() {
-      rate = fetchedRate;
-    });
+    setState(() {});
   }
 
   @override
