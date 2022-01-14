@@ -87,12 +87,18 @@ class _PriceScreenState extends State<PriceScreen> {
             builder: (BuildContext context, AsyncSnapshot<Map<String, double>> snapshot) {
               bool isLoaded = snapshot.connectionState == ConnectionState.done;
               var rates = snapshot.data;
-              var currentRate = isLoaded ? rates!['BTC']! : 0;
 
-              return CoinCard(
-                currency: 'BTC',
-                rate: isLoaded ? currentRate.toStringAsFixed(2) : '?',
-                selectedCurrency: selectedCurrency,
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: cryptoList.map((crypto) {
+                  var currentRate = isLoaded ? rates![crypto]! : 0;
+
+                  return CoinCard(
+                    currency: crypto,
+                    rate: isLoaded ? currentRate.toStringAsFixed(2) : '?',
+                    selectedCurrency: selectedCurrency,
+                  );
+                }).toList(),
               );
             },
           ),
