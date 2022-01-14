@@ -13,7 +13,7 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency = 'USD';
-  double rate = 0;
+  late Future<Map<String, double>> ratesFuture;
 
   Widget _materialDropdown({required Function(String?) onChanged}) {
     return DropdownButton<String>(
@@ -50,14 +50,25 @@ class _PriceScreenState extends State<PriceScreen> {
     }
   }
 
-  void _onCurrencySelected(String? value) async {
-    if (value?.isNotEmpty ?? false) {
-      selectedCurrency = value!;
-    }
+  void _onCurrencySelected(String? value) {
+    setState(() {
+      if (value?.isNotEmpty ?? false) {
+        selectedCurrency = value!;
+      }
 
-    print(await CoinData().getExchangeRates(selectedCurrency));
+      _fetchRates();
+    });
+  }
 
-    setState(() {});
+  void _fetchRates() {
+    ratesFuture = CoinData().getExchangeRates(selectedCurrency);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _fetchRates();
   }
 
   @override
@@ -71,26 +82,19 @@ class _PriceScreenState extends State<PriceScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
-            child: Card(
-              color: Colors.lightBlueAccent,
-              elevation: 5.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
-                child: Text(
-                  '1 BTC = ${rate.toStringAsFixed(2)} $selectedCurrency',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
+          FutureBuilder<Map<String, double>>(
+            future: ratesFuture,
+            builder: (BuildContext context, AsyncSnapshot<Map<String, double>> snapshot) {
+              bool isLoaded = snapshot.connectionState == ConnectionState.done;
+              var rates = snapshot.data;
+              var currentRate = isLoaded ? rates!['BTC']! : 0;
+
+              return CoinCard(
+                currency: 'BTC',
+                rate: isLoaded ? currentRate.toStringAsFixed(2) : '?',
+                selectedCurrency: selectedCurrency,
+              );
+            },
           ),
           Container(
             height: 150.0,
@@ -100,6 +104,44 @@ class _PriceScreenState extends State<PriceScreen> {
             child: _picker(),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CoinCard extends StatelessWidget {
+  const CoinCard({
+    Key? key,
+    required this.currency,
+    required this.rate,
+    required this.selectedCurrency,
+  }) : super(key: key);
+
+  final String currency;
+  final String rate;
+  final String selectedCurrency;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
+      child: Card(
+        color: Colors.lightBlueAccent,
+        elevation: 5.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
+          child: Text(
+            '1 $currency = $rate $selectedCurrency',
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 20.0,
+              color: Colors.white,
+            ),
+          ),
+        ),
       ),
     );
   }
