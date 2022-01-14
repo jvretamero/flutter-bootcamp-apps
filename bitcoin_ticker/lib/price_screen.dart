@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:io' show Platform;
 
 import 'coin_data.dart';
 
@@ -12,11 +14,55 @@ class PriceScreen extends StatefulWidget {
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency = 'USD';
 
+  Widget _materialDropdown({required Function(String?) onChanged}) {
+    return DropdownButton<String>(
+      value: selectedCurrency,
+      items: currenciesList
+          .map(
+            (currency) => DropdownMenuItem(child: Text(currency), value: currency),
+          )
+          .toList(),
+      onChanged: onChanged,
+    );
+  }
+
+  Widget _cupertinoPicker({required Function(String?) onChanged}) {
+    return CupertinoPicker(
+      itemExtent: 32,
+      backgroundColor: Colors.lightBlue,
+      onSelectedItemChanged: (int selectedIndex) {
+        onChanged.call(currenciesList[selectedIndex]);
+      },
+      children: currenciesList
+          .map(
+            (currency) => Text(currency),
+          )
+          .toList(),
+    );
+  }
+
+  Widget _picker() {
+    if (Platform.isIOS) {
+      return _cupertinoPicker(onChanged: _onCurrencySelected);
+    } else {
+      return _materialDropdown(onChanged: _onCurrencySelected);
+    }
+  }
+
+  void _onCurrencySelected(String? value) {
+    setState(() {
+      if (value?.isNotEmpty ?? false) {
+        selectedCurrency = value!;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('🤑 Coin Ticker'),
+        backgroundColor: Colors.lightBlue,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,21 +94,7 @@ class _PriceScreenState extends State<PriceScreen> {
             alignment: Alignment.center,
             padding: const EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
-            child: DropdownButton<String>(
-              value: selectedCurrency,
-              items: currenciesList
-                  .map(
-                    (currency) => DropdownMenuItem(child: Text(currency), value: currency),
-                  )
-                  .toList(),
-              onChanged: (value) {
-                setState(() {
-                  if (value?.isNotEmpty ?? false) {
-                    selectedCurrency = value!;
-                  }
-                });
-              },
-            ),
+            child: _picker(),
           ),
         ],
       ),
