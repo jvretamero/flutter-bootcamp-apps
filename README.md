@@ -52,6 +52,14 @@ An app that calculates your BMI. This app covers some code organization, Dart co
 
 ## Clima
 
-A weather app. This apps covers more Dart concepts, networking and also navigation (which include passing data between screens).
+A weather app. This app covers more Dart concepts, networking and also navigation (which include passing data between screens).
 
 ![Clima main screen](screenshots/clima1.png) ![Clima city screen](screenshots/clima2.png)
+
+## Bitcoin Ticker
+
+A crypto app that displays exchange rates between Bitcoin and your selected currency. This app covers the use of `FutureBuilder` and the use of Cupertino widgets. The data is fetched fron [CoinAPI](https://www.coinapi.io/).
+
+> As this app requires an api key, I used the [flutter_dotenv](https://pub.dev/packages/flutter_dotenv) package as a way to hide the api key from the version control
+
+![Bitcoin ticker app screenshot](screenshots/bitcoin_ticker.png)
