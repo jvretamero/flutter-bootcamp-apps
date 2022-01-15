@@ -63,3 +63,7 @@ A crypto app that displays exchange rates between Bitcoin and your selected curr
 > As this app requires an api key, I used the [flutter_dotenv](https://pub.dev/packages/flutter_dotenv) package as a way to hide the api key from the version control
 
 ![Bitcoin ticker app screenshot](screenshots/bitcoin_ticker.png)
+
+## Flash Chat
+
+A chatting app. This app covers named routes and animations.
