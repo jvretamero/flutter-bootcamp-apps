@@ -14,10 +14,16 @@ class FlashChat extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(
         textTheme: const TextTheme(
-          bodyText1: TextStyle(color: Colors.black54),
+          bodyText2: TextStyle(color: Colors.black54),
         ),
       ),
-      home: const WelcomeScreen(),
+      initialRoute: WelcomeScreen.route,
+      routes: {
+        WelcomeScreen.route: (context) => const WelcomeScreen(),
+        LoginScreen.route: (context) => const LoginScreen(),
+        RegistrationScreen.route: (context) => const RegistrationScreen(),
+        ChatScreen.route: (context) => const ChatScreen(),
+      },
     );
   }
 }
