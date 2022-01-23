@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flash_chat/components/message_bubble.dart';
+import 'package:flash_chat/components/message_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,6 +18,8 @@ class _ChatScreenState extends State<ChatScreen> {
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   late String messageText;
+
+  CollectionReference<Map<String, dynamic>> _messsagesCollection() => _firestore.collection('messages');
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +43,9 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            Expanded(
+              child: MessageList(),
+            ),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -56,7 +63,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     onPressed: () async {
                       var user = _auth.currentUser;
 
-                      await _firestore.collection('messages').add({
+                      await _messsagesCollection().add({
                         'text': messageText,
                         'sender': user?.email ?? 'undefined',
                       });
