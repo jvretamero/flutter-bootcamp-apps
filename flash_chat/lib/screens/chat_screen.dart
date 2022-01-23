@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash_chat/components/message_bubble.dart';
+import 'package:flash_chat/components/message_composer.dart';
 import 'package:flash_chat/components/message_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/constants.dart';
@@ -17,7 +18,6 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
-  late String messageText;
 
   CollectionReference<Map<String, dynamic>> _messsagesCollection() => _firestore.collection('messages');
 
@@ -46,39 +46,15 @@ class _ChatScreenState extends State<ChatScreen> {
             Expanded(
               child: MessageList(),
             ),
-            Container(
-              decoration: kMessageContainerDecoration,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: TextField(
-                      onChanged: (value) {
-                        messageText = value;
-                      },
-                      decoration: kMessageTextFieldDecoration,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      var user = _auth.currentUser;
+            MessageComposer(
+              onMessage: (message) async {
+                var user = _auth.currentUser;
 
-                      await _messsagesCollection().add({
-                        'text': messageText,
-                        'sender': user?.email ?? 'undefined',
-                      });
-
-                      // TODO show indicator
-                      // TODO clear text input
-                      // TODO focus on text input
-                    },
-                    child: const Text(
-                      'Send',
-                      style: kSendButtonTextStyle,
-                    ),
-                  ),
-                ],
-              ),
+                await _messsagesCollection().add({
+                  'text': message,
+                  'sender': user?.email ?? 'undefined',
+                });
+              },
             ),
           ],
         ),
