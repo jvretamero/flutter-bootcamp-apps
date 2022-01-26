@@ -19,7 +19,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
 
-  CollectionReference<Map<String, dynamic>> _messsagesCollection() => _firestore.collection('messages');
+  String get _currentUser => _auth.currentUser?.email ?? 'undefined';
 
   @override
   Widget build(BuildContext context) {
@@ -44,15 +44,15 @@ class _ChatScreenState extends State<ChatScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Expanded(
-              child: MessageList(),
+              child: MessageList(
+                currentUser: _currentUser,
+              ),
             ),
             MessageComposer(
               onMessage: (message) async {
-                var user = _auth.currentUser;
-
-                await _messsagesCollection().add({
+                await _firestore.collection('messages').add({
                   'text': message,
-                  'sender': user?.email ?? 'undefined',
+                  'sender': _currentUser,
                 });
               },
             ),

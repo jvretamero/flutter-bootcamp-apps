@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 import 'message_bubble.dart';
 
 class MessageList extends StatelessWidget {
-  MessageList({Key? key}) : super(key: key);
+  MessageList({
+    Key? key,
+    required this.currentUser,
+  }) : super(key: key);
 
+  final String currentUser;
   final _firestore = FirebaseFirestore.instance;
 
   @override
@@ -24,7 +28,11 @@ class MessageList extends StatelessWidget {
                 var text = data['text'];
                 var sender = data['sender'];
 
-                return MessageBubble(text: text, sender: sender);
+                return MessageBubble(
+                  text: text,
+                  sender: sender,
+                  isMe: sender == currentUser,
+                );
               },
             ).toList(),
           );
