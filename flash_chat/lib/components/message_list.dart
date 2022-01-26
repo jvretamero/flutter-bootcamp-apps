@@ -19,11 +19,12 @@ class MessageList extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return ListView(
+            reverse: true,
             padding: const EdgeInsets.symmetric(
               horizontal: 10,
               vertical: 20,
             ),
-            children: snapshot.data!.docs.map(
+            children: snapshot.data!.docs.reversed.map(
               (data) {
                 var text = data['text'];
                 var sender = data['sender'];
