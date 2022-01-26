@@ -5,6 +5,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'login_screen.dart';
 import 'registration_screen.dart';
 
+// TODO detect already logged user
 class WelcomeScreen extends StatefulWidget {
   static const route = '/welcome';
 

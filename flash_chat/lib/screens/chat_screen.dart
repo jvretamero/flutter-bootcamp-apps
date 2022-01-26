@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flash_chat/components/message_bubble.dart';
 import 'package:flash_chat/components/message_composer.dart';
 import 'package:flash_chat/components/message_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flash_chat/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -50,6 +48,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             MessageComposer(
               onMessage: (message) async {
+                // TODO show indicator
                 await _firestore.collection('messages').add({
                   'text': message,
                   'sender': _currentUser,

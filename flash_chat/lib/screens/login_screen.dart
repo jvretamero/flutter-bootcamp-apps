@@ -5,6 +5,7 @@ import 'package:flash_chat/constants.dart';
 import 'package:flash_chat/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 
+// TODO persist logged user
 class LoginScreen extends StatefulWidget {
   static const route = '/login';
 
