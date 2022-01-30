@@ -11,6 +11,8 @@ class TasksList extends StatelessWidget {
     return ListView(
       children: const [
         TaskTile(),
+        TaskTile(),
+        TaskTile(),
       ],
     );
   }
