@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 
-class TaskTile extends StatelessWidget {
+// TODO add swipe to delete
+class TaskTile extends StatefulWidget {
   const TaskTile({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<TaskTile> createState() => _TaskTileState();
+}
+
+class _TaskTileState extends State<TaskTile> {
+  bool _isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +23,13 @@ class TaskTile extends StatelessWidget {
         ),
       ),
       trailing: Checkbox(
-        onChanged: (bool? value) {},
-        value: false,
+        activeColor: Colors.lightBlueAccent,
+        onChanged: (bool? value) {
+          setState(() {
+            _isChecked = value ?? false;
+          });
+        },
+        value: _isChecked,
       ),
     );
   }
