@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todoey/components/tasks_list.dart';
+import 'package:todoey/models/task_data.dart';
 
 import 'add_task_screen.dart';
 
@@ -41,8 +43,8 @@ class TasksScreen extends StatelessWidget {
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  CircleAvatar(
+                children: [
+                  const CircleAvatar(
                     backgroundColor: Colors.white,
                     child: Icon(
                       Icons.list,
@@ -51,8 +53,8 @@ class TasksScreen extends StatelessWidget {
                     ),
                     radius: 30,
                   ),
-                  SizedBox(height: 20),
-                  Text(
+                  const SizedBox(height: 20),
+                  const Text(
                     'Todoey',
                     style: TextStyle(
                       color: Colors.white,
@@ -60,12 +62,16 @@ class TasksScreen extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  Text(
-                    '12 tasks',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    ),
+                  Consumer<TaskData>(
+                    builder: (BuildContext context, TaskData taskData, Widget? child) {
+                      return Text(
+                        '${taskData.count} tasks',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
