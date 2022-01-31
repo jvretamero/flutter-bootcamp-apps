@@ -1,36 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:todoey/models/task.dart';
 
 // TODO add swipe to delete
-class TaskTile extends StatefulWidget {
+
+class TaskTile extends StatelessWidget {
+  final Task task;
+
   const TaskTile({
     Key? key,
+    required this.task,
   }) : super(key: key);
-
-  @override
-  State<TaskTile> createState() => _TaskTileState();
-}
-
-class _TaskTileState extends State<TaskTile> {
-  bool _isChecked = false;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        'Task',
+        task.title,
         style: TextStyle(
           fontSize: 20,
-          decoration: _isChecked ? TextDecoration.lineThrough : TextDecoration.none,
+          decoration: task.isDone ? TextDecoration.lineThrough : TextDecoration.none,
         ),
       ),
       trailing: Checkbox(
         activeColor: Colors.lightBlueAccent,
         onChanged: (bool? value) {
-          setState(() {
-            _isChecked = value ?? false;
-          });
+          // TODO
         },
-        value: _isChecked,
+        value: task.isDone,
       ),
     );
   }
