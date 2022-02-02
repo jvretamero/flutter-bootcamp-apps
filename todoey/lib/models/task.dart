@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
-
-class Task extends ChangeNotifier {
+class Task {
   final String title;
   late bool _isDone;
 
@@ -15,6 +13,5 @@ class Task extends ChangeNotifier {
 
   void toggleDone() {
     _isDone = !_isDone;
-    notifyListeners();
   }
 }

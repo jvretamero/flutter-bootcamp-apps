@@ -16,19 +16,26 @@ class TasksList extends StatelessWidget {
         return ListView.builder(
           itemCount: taskData.count,
           itemBuilder: (context, index) {
-            return ChangeNotifierProvider<Task>(
-              create: (context) => taskData[index],
-              child: Dismissible(
-                key: UniqueKey(),
-                direction: DismissDirection.endToStart,
-                background: _dismissibleBackground(),
-                child: const TaskTile(),
-                onDismissed: (direction) {
-                  taskData.removeTask(index);
+            return Dismissible(
+              key: UniqueKey(),
+              direction: DismissDirection.endToStart,
+              background: _dismissibleBackground(),
+              child: TaskTile(task: taskData[index]),
+              onDismissed: (direction) {
+                Task removedTask = taskData.removeTask(index);
 
-                  // TODO show snackbar to undo
-                },
-              ),
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Removed task "${removedTask.title}"'),
+                    action: SnackBarAction(
+                      label: 'Undo',
+                      onPressed: () {
+                        taskData.addTaskAt(index, removedTask);
+                      },
+                    ),
+                  ),
+                );
+              },
             );
           },
         );
