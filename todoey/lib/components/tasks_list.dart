@@ -18,11 +18,32 @@ class TasksList extends StatelessWidget {
           itemBuilder: (context, index) {
             return ChangeNotifierProvider<Task>(
               create: (context) => taskData[index],
-              child: const TaskTile(),
+              child: Dismissible(
+                key: UniqueKey(),
+                direction: DismissDirection.endToStart,
+                background: _dismissibleBackground(),
+                child: const TaskTile(),
+                onDismissed: (direction) {
+                  taskData.removeTask(index);
+
+                  // TODO show snackbar to undo
+                },
+              ),
             );
           },
         );
       },
+    );
+  }
+
+  Container _dismissibleBackground() {
+    return Container(
+      color: Colors.red,
+      padding: const EdgeInsets.all(10),
+      child: const Align(
+        alignment: Alignment.centerRight,
+        child: Icon(Icons.delete, color: Colors.white),
+      ),
     );
   }
 }
