@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey/components/tasks_list.dart';
-import 'package:todoey/models/task_data.dart';
+import 'package:todoey/models/tasks_data.dart';
 
 import 'add_task_screen.dart';
 
@@ -62,8 +62,8 @@ class TasksScreen extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  Consumer<TaskData>(
-                    builder: (BuildContext context, TaskData taskData, Widget? child) {
+                  Consumer<TasksData>(
+                    builder: (BuildContext context, TasksData taskData, Widget? child) {
                       return Text(
                         '${taskData.count} tasks',
                         style: const TextStyle(

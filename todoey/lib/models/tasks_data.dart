@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:todoey/models/task.dart';
 
-class TaskData extends ChangeNotifier {
+class TasksData extends ChangeNotifier {
   List<Task> _tasks = [
     Task(title: 'Buy milk', isDone: false),
     Task(title: 'Buy meat', isDone: false),
@@ -11,4 +11,9 @@ class TaskData extends ChangeNotifier {
   int get count => _tasks.length;
 
   Task operator [](int index) => _tasks[index];
+
+  void addTask(Task task) {
+    _tasks.add(task);
+    notifyListeners();
+  }
 }

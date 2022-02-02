@@ -6,7 +6,7 @@ class Task {
 
   Task({
     required this.title,
-    required bool isDone,
+    bool isDone = false,
   }) {
     _isDone = isDone;
   }
