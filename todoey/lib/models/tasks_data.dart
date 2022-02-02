@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:todoey/models/task.dart';
 
 class TasksData extends ChangeNotifier {
+  // TODO persist tasks
   List<Task> _tasks = [
     Task(title: 'Buy milk', isDone: false),
     Task(title: 'Buy meat', isDone: false),
