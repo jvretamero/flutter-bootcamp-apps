@@ -18,9 +18,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   bool _isTitleEmpty = true;
 
   Function() _addTask(BuildContext context) {
-    return () {
+    return () async {
       var taskData = Provider.of<TasksData>(context, listen: false);
-      taskData.addTask(Task(title: _taskTitle));
+      taskData.addTask(_taskTitle);
 
       Navigator.pop(context);
     };

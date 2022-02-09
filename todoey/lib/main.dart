@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey/models/tasks_data.dart';
 import 'package:todoey/screens/tasks_screen.dart';
+import 'package:todoey/services/database_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await DatabaseService.instance.open();
+
   runApp(const MyApp());
 }
 

@@ -1,20 +1,22 @@
 import 'package:flutter/foundation.dart';
 import 'package:todoey/models/task.dart';
+import 'package:todoey/services/database_service.dart';
 
 class TasksData extends ChangeNotifier {
-  // TODO persist tasks
-  List<Task> _tasks = [
-    Task(title: 'Buy milk', isDone: false),
-    Task(title: 'Buy meat', isDone: false),
-    Task(title: 'Buy water', isDone: true),
-  ];
+  final List<Task> _tasks = [];
 
   int get count => _tasks.length;
 
   Task operator [](int index) => _tasks[index];
 
-  void addTask(Task task) {
+  Future loadTasks() async {
+    _tasks.addAll(await DatabaseService.instance.getAll());
+  }
+
+  void addTask(String title) async {
+    Task task = await DatabaseService.instance.insert(title);
     _tasks.add(task);
+
     notifyListeners();
   }
 
