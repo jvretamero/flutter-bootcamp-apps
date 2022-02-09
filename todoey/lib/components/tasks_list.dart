@@ -51,20 +51,26 @@ class _TasksListState extends State<TasksList> {
           direction: DismissDirection.endToStart,
           background: _dismissibleBackground(),
           child: TaskTile(task: taskData[index]),
-          onDismissed: (direction) {
+          onDismissed: (direction) async {
             Task removedTask = taskData.removeTask(index);
 
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Removed task "${removedTask.title}"'),
-                action: SnackBarAction(
-                  label: 'Undo',
-                  onPressed: () {
-                    taskData.addTaskAt(index, removedTask);
-                  },
-                ),
-              ),
-            );
+            SnackBarClosedReason reason = await ScaffoldMessenger.of(context)
+                .showSnackBar(
+                  SnackBar(
+                    content: Text('Removed task "${removedTask.title}"'),
+                    action: SnackBarAction(
+                      label: 'Undo',
+                      onPressed: () {
+                        taskData.addTaskAt(index, removedTask);
+                      },
+                    ),
+                  ),
+                )
+                .closed;
+
+            if (reason != SnackBarClosedReason.action) {
+              await taskData.removeTaskPermanently(removedTask.id);
+            }
           },
         );
       },

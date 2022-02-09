@@ -51,4 +51,8 @@ CREATE TABLE $_TABLE (
   Future update(Task task) async {
     await _db.update(_TABLE, task.toMap(), where: '$_COLUMN_ID = ?', whereArgs: [task.id]);
   }
+
+  Future remove(int id) async {
+    await _db.delete(_TABLE, where: '$_COLUMN_ID = ?', whereArgs: [id]);
+  }
 }
