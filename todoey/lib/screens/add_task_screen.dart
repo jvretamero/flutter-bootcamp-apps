@@ -14,7 +14,17 @@ class AddTaskScreen extends StatefulWidget {
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
-  late String taskTitle;
+  late String _taskTitle;
+  bool _isTitleEmpty = true;
+
+  Function() _addTask(BuildContext context) {
+    return () {
+      var taskData = Provider.of<TasksData>(context, listen: false);
+      taskData.addTask(Task(title: _taskTitle));
+
+      Navigator.pop(context);
+    };
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +60,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 ),
                 onChanged: (value) {
                   setState(() {
-                    taskTitle = value;
+                    _taskTitle = value;
+                    _isTitleEmpty = value.isEmpty;
                   });
                 },
                 decoration: const InputDecoration(
@@ -59,24 +70,25 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              // TODO disable when empty text
-              RawMaterialButton(
-                fillColor: Colors.lightBlueAccent,
-                elevation: 0,
-                padding: const EdgeInsets.all(15),
-                onPressed: () {
-                  var taskData = Provider.of<TasksData>(context, listen: false);
-                  taskData.addTask(Task(title: taskTitle));
-
-                  Navigator.pop(context);
-                },
-                child: const Text(
-                  'Add',
-                  style: TextStyle(
+              TextButton(
+                style: TextButton.styleFrom(
+                  primary: Colors.white,
+                  textStyle: const TextStyle(
                     fontSize: 18,
-                    color: Colors.white,
                   ),
+                  padding: const EdgeInsets.all(15),
+                  elevation: 0,
+                ).copyWith(
+                  backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+                    if (states.contains(MaterialState.disabled)) {
+                      return Colors.lightBlueAccent.withOpacity(0.39);
+                    }
+
+                    return Colors.lightBlueAccent;
+                  }),
                 ),
+                onPressed: _isTitleEmpty ? null : _addTask(context),
+                child: const Text('Add'),
               ),
             ],
           ),
