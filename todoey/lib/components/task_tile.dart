@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todoey/models/task.dart';
+import 'package:todoey/models/tasks_data.dart';
 
-class TaskTile extends StatefulWidget {
+class TaskTile extends StatelessWidget {
   const TaskTile({
     Key? key,
     required this.task,
@@ -10,28 +12,22 @@ class TaskTile extends StatefulWidget {
   final Task task;
 
   @override
-  State<TaskTile> createState() => _TaskTileState();
-}
-
-class _TaskTileState extends State<TaskTile> {
-  @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        widget.task.title,
+        task.title,
         style: TextStyle(
           fontSize: 20,
-          decoration: widget.task.isDone ? TextDecoration.lineThrough : TextDecoration.none,
+          decoration: task.isDone ? TextDecoration.lineThrough : TextDecoration.none,
         ),
       ),
       trailing: Checkbox(
         activeColor: Colors.lightBlueAccent,
         onChanged: (bool? value) {
-          setState(() {
-            widget.task.toggleDone();
-          });
+          var tasksData = Provider.of<TasksData>(context, listen: false);
+          tasksData.toggleTaskDone(task);
         },
-        value: widget.task.isDone,
+        value: task.isDone,
       ),
     );
   }

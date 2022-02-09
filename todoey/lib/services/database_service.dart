@@ -41,12 +41,14 @@ CREATE TABLE $_TABLE (
       },
     );
 
-    return Future.delayed(const Duration(seconds: 5), () {
-      return Task(id: id, title: title);
-    });
+    return Task(id: id, title: title);
   }
 
   Future<List<Task>> getAll() async {
     return (await _db.query(_TABLE, orderBy: _COLUMN_ID)).map((e) => Task.fromMap(e)).toList();
+  }
+
+  Future update(Task task) async {
+    await _db.update(_TABLE, task.toMap(), where: '$_COLUMN_ID = ?', whereArgs: [task.id]);
   }
 }

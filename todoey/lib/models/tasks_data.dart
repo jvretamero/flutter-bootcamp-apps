@@ -32,4 +32,10 @@ class TasksData extends ChangeNotifier {
 
     return removedTask;
   }
+
+  Future toggleTaskDone(Task task) async {
+    task.toggleDone();
+    await DatabaseService.instance.update(task);
+    notifyListeners();
+  }
 }
