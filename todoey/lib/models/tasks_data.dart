@@ -13,7 +13,7 @@ class TasksData extends ChangeNotifier {
     _tasks.addAll(await DatabaseService.instance.getAll());
   }
 
-  void addTask(String title) async {
+  Future addTask(String title) async {
     Task task = await DatabaseService.instance.insert(title);
     _tasks.add(task);
 

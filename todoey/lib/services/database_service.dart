@@ -41,7 +41,9 @@ CREATE TABLE $_TABLE (
       },
     );
 
-    return Task(id: id, title: title);
+    return Future.delayed(const Duration(seconds: 5), () {
+      return Task(id: id, title: title);
+    });
   }
 
   Future<List<Task>> getAll() async {
