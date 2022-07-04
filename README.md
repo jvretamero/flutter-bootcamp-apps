@@ -6,6 +6,8 @@ This is the repository for the apps created during the [The Complete Flutter Dev
 
 This is the very first app build, it shows how Flutter apps are structured, some concepts of the `MaterialApp`, `Scaffold` and `Image` widgets. It also convers assets and app icons.
 
+[Source](/im_rich)
+
 ![I Am Right app screenshot](screenshots/iamrich.png)
 
 ## Mi Card
