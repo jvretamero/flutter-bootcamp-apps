@@ -22,6 +22,8 @@ A business card as an app. This app covers some concepts of layout (columns and 
 
 A dice rolling app. This app covers the concept of stateless and stateful widgets.
 
+[Source](/dicee)
+
 ![Dicee app screenshot](screenshots/dicee.png)
 
 ## Xylophone

@@ -49,7 +49,7 @@ class _DiceButton extends StatefulWidget {
 
 class _DiceButtonState extends State<_DiceButton> {
   final _random = Random();
-  late int _diceNumber;
+  int _diceNumber = 0;
 
   @override
   void initState() {
