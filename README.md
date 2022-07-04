@@ -32,6 +32,8 @@ A music app. This app covers the concept of Flutter packages.
 
 This app uses the [audioplayers](https://pub.dev/packages/audioplayers) package.
 
+[Source](/xylophone)
+
 ![Xylophone app screenshot](screenshots/xylophone.png)
 
 ## Quizzler
