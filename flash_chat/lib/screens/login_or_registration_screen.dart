@@ -2,20 +2,33 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash_chat/components/progress_hud.dart';
 import 'package:flash_chat/components/rounded_button.dart';
 import 'package:flash_chat/constants.dart';
-import 'package:flash_chat/screens/chat_screen.dart';
-import 'package:flash_chat/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  static const route = '/login';
+import 'chat_screen.dart';
+import 'welcome_screen.dart';
 
-  const LoginScreen({Key? key}) : super(key: key);
-
-  @override
-  _LoginScreenState createState() => _LoginScreenState();
+enum LoginOrRegistrationOperation {
+  login,
+  registration,
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class LoginOrRegistrationScreen extends StatefulWidget {
+  static const loginRoute = '/login';
+  static const registrationRoute = '/registration';
+
+  final LoginOrRegistrationOperation operation;
+
+  const LoginOrRegistrationScreen({
+    Key? key,
+    required this.operation,
+  }) : super(key: key);
+
+  @override
+  State<LoginOrRegistrationScreen> createState() =>
+      _LoginOrRegistrationScreenState();
+}
+
+class _LoginOrRegistrationScreenState extends State<LoginOrRegistrationScreen> {
   final _auth = FirebaseAuth.instance;
   bool _isLoading = false;
   final _emailController = TextEditingController();
@@ -101,7 +114,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 24.0,
               ),
               RoundedButton(
-                text: 'Log In',
+                text: widget.operation == LoginOrRegistrationOperation.login
+                    ? 'Log In'
+                    : 'Register',
                 color: Colors.lightBlueAccent,
                 onPressed: () async {
                   _emailError = null;
@@ -124,10 +139,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   _setLoading(isLoading: true);
 
                   try {
-                    await _auth.signInWithEmailAndPassword(
-                      email: _emailController.text,
-                      password: _passwordController.text,
-                    );
+                    if (widget.operation ==
+                        LoginOrRegistrationOperation.login) {
+                      await _auth.signInWithEmailAndPassword(
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                      );
+                    } else {
+                      await _auth.createUserWithEmailAndPassword(
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                      );
+                    }
 
                     _setLoading(isLoading: false);
                     Navigator.pushNamed(context, ChatScreen.route);

@@ -2,8 +2,7 @@ import 'package:flash_chat/components/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
-import 'login_screen.dart';
-import 'registration_screen.dart';
+import 'login_or_registration_screen.dart';
 
 // TODO detect already logged user
 class WelcomeScreen extends StatefulWidget {
@@ -55,14 +54,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               text: 'Log In',
               color: Colors.lightBlueAccent,
               onPressed: () {
-                Navigator.pushNamed(context, LoginScreen.route);
+                Navigator.pushNamed(
+                    context, LoginOrRegistrationScreen.loginRoute);
               },
             ),
             RoundedButton(
               text: 'Register',
               color: Colors.blueAccent,
               onPressed: () {
-                Navigator.pushNamed(context, RegistrationScreen.route);
+                Navigator.pushNamed(
+                    context, LoginOrRegistrationScreen.registrationRoute);
               },
             ),
           ],
