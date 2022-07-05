@@ -18,8 +18,19 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _auth = FirebaseAuth.instance;
   bool _isLoading = false;
-  String? _email;
-  String? _password;
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  String? _emailError;
+  String? _passwordError;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+
+    super.dispose();
+  }
 
   void _setLoading({required bool isLoading}) => setState(() {
         _isLoading = isLoading;
@@ -66,28 +77,24 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 48.0,
               ),
               TextField(
-                //TODO restore previous text
+                controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
-                onChanged: (value) {
-                  _email = value;
-                },
                 decoration: kTextFieldDecoration.copyWith(
                   hintText: 'Enter your email',
+                  errorText: _emailError,
                 ),
               ),
               const SizedBox(
                 height: 8.0,
               ),
               TextField(
-                //TODO restore previous text
+                controller: _passwordController,
                 obscureText: true,
                 textAlign: TextAlign.center,
-                onChanged: (value) {
-                  _password = value;
-                },
                 decoration: kTextFieldDecoration.copyWith(
                   hintText: 'Enter your password',
+                  errorText: _passwordError,
                 ),
               ),
               const SizedBox(
@@ -97,8 +104,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 text: 'Log In',
                 color: Colors.lightBlueAccent,
                 onPressed: () async {
-                  if (_email?.isEmpty == true || _password?.isEmpty == true) {
-                    //TODO show message
+                  _emailError = null;
+                  _passwordError = null;
+
+                  if (_emailController.text.isEmpty ||
+                      _passwordController.text.isEmpty) {
+                    setState(() {
+                      _emailError = _emailController.text.isEmpty
+                          ? 'The email is required'
+                          : null;
+
+                      _passwordError = _passwordController.text.isEmpty
+                          ? 'The password is required'
+                          : null;
+                    });
                     return;
                   }
 
@@ -106,8 +125,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   try {
                     await _auth.signInWithEmailAndPassword(
-                      email: _email!,
-                      password: _password!,
+                      email: _emailController.text,
+                      password: _passwordController.text,
                     );
 
                     _setLoading(isLoading: false);
