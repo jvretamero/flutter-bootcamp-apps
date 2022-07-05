@@ -18,12 +18,28 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _auth = FirebaseAuth.instance;
   bool _isLoading = false;
-  late String _email;
-  late String _password;
+  String? _email;
+  String? _password;
 
   void _setLoading({required bool isLoading}) => setState(() {
         _isLoading = isLoading;
       });
+
+  Future showMessage(BuildContext context, String message) => showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) => AlertDialog(
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Ok'),
+            )
+          ],
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 48.0,
               ),
               TextField(
+                //TODO restore previous text
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
                 onChanged: (value) {
@@ -63,6 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 8.0,
               ),
               TextField(
+                //TODO restore previous text
                 obscureText: true,
                 textAlign: TextAlign.center,
                 onChanged: (value) {
@@ -79,18 +97,24 @@ class _LoginScreenState extends State<LoginScreen> {
                 text: 'Log In',
                 color: Colors.lightBlueAccent,
                 onPressed: () async {
+                  if (_email?.isEmpty == true || _password?.isEmpty == true) {
+                    //TODO show message
+                    return;
+                  }
+
                   _setLoading(isLoading: true);
+
                   try {
                     await _auth.signInWithEmailAndPassword(
-                      email: _email,
-                      password: _password,
+                      email: _email!,
+                      password: _password!,
                     );
 
                     _setLoading(isLoading: false);
                     Navigator.pushNamed(context, ChatScreen.route);
-                  } catch (e) {
-                    print(e);
+                  } on FirebaseAuthException catch (e) {
                     _setLoading(isLoading: false);
+                    await showMessage(context, e.message ?? 'Unknown error');
                   }
                 },
               ),
