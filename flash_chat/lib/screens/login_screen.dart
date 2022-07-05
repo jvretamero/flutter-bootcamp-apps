@@ -3,9 +3,9 @@ import 'package:flash_chat/components/progress_hud.dart';
 import 'package:flash_chat/components/rounded_button.dart';
 import 'package:flash_chat/constants.dart';
 import 'package:flash_chat/screens/chat_screen.dart';
+import 'package:flash_chat/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
-// TODO persist logged user
 class LoginScreen extends StatefulWidget {
   static const route = '/login';
 
@@ -94,6 +94,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                 },
               ),
+              RoundedButton(
+                text: 'Back',
+                color: Colors.blueAccent,
+                onPressed: () {
+                  Navigator.pushNamed(context, WelcomeScreen.route);
+                },
+              )
             ],
           ),
         ),
