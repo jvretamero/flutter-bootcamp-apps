@@ -60,6 +60,8 @@ An app that calculates your BMI. This app covers some code organization, Dart co
 
 > This project was based on the [Ruben Vaalt design](https://dribbble.com/shots/4585382-Simple-BMI-Calculator)
 
+[Source](/bmi)
+
 ![BMI Calculator main screen](screenshots/bmi.png) ![BMI Calculator result screen](screenshots/bmi2.png)
 
 ## Clima
