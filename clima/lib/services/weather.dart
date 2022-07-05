@@ -2,7 +2,7 @@ import 'location.dart';
 import 'networking.dart';
 
 class WeatherModel {
-  static const _apiKey = 'b2acc50dcb03e2e55c6326e72358a3ca';
+  static const _apiKey = '--REPLACE--';
   static const _baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
   static const _baseQuery = 'appid=$_apiKey&units=metric';
 
@@ -18,7 +18,8 @@ class WeatherModel {
     var location = Location();
     await location.getCurrentLocation();
 
-    var url = '$_baseUrl/?$_baseQuery&lat=${location.latitude}&lon=${location.longitude}';
+    var url =
+        '$_baseUrl/?$_baseQuery&lat=${location.latitude}&lon=${location.longitude}';
 
     print(url);
 
