@@ -24,6 +24,7 @@ class MessageList extends StatelessWidget {
               horizontal: 10,
               vertical: 20,
             ),
+            // TODO sort by date
             children: snapshot.data!.docs.reversed.map(
               (data) {
                 var text = data['text'];
@@ -38,6 +39,7 @@ class MessageList extends StatelessWidget {
             ).toList(),
           );
         } else if (snapshot.hasError) {
+          print(snapshot.error);
           return const Center(
             child: Text(
               'An error has occurred',

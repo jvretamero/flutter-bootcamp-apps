@@ -89,3 +89,10 @@ A chatting app. This app covers named routes and animations.
 For this project, I did some changes by myself:
 
 * Instead of depending on the [modal_progress_hud](https://pub.dev/packages/modal_progress_hud) package, I've created my own widget to show a progress HUD.
+* I did a few improvements by myself:
+  * Back button on login screen and registration screen
+  * Show Firebase errors to the user
+  * Better form validation for required fields
+  * Refactored the login and registration screen into a single screen
+
+[Source](/flash_chat)
