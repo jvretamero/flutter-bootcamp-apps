@@ -153,7 +153,7 @@ class _LoginOrRegistrationScreenState extends State<LoginOrRegistrationScreen> {
                     }
 
                     _setLoading(isLoading: false);
-                    Navigator.pushNamed(context, ChatScreen.route);
+                    Navigator.pushReplacementNamed(context, ChatScreen.route);
                   } on FirebaseAuthException catch (e) {
                     _setLoading(isLoading: false);
                     await showMessage(context, e.message ?? 'Unknown error');
@@ -164,7 +164,7 @@ class _LoginOrRegistrationScreenState extends State<LoginOrRegistrationScreen> {
                 text: 'Back',
                 color: Colors.blueAccent,
                 onPressed: () {
-                  Navigator.pushNamed(context, WelcomeScreen.route);
+                  Navigator.pop(context);
                 },
               )
             ],
