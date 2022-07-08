@@ -49,10 +49,10 @@ class _ChatScreenState extends State<ChatScreen> {
             MessageComposer(
               onMessage: (message) async {
                 // TODO show indicator
-                // TODO add date for sorting
                 await _firestore.collection('messages').add({
                   'text': message,
                   'sender': _currentUser,
+                  'date': DateTime.now().toUtc()
                 });
               },
             ),

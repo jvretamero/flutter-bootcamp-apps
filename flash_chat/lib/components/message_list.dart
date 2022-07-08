@@ -15,7 +15,7 @@ class MessageList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-      stream: _firestore.collection('messages').snapshots(),
+      stream: _firestore.collection('messages').orderBy('date').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return ListView(
@@ -24,7 +24,6 @@ class MessageList extends StatelessWidget {
               horizontal: 10,
               vertical: 20,
             ),
-            // TODO sort by date
             children: snapshot.data!.docs.reversed.map(
               (data) {
                 var text = data['text'];
@@ -39,7 +38,6 @@ class MessageList extends StatelessWidget {
             ).toList(),
           );
         } else if (snapshot.hasError) {
-          print(snapshot.error);
           return const Center(
             child: Text(
               'An error has occurred',
