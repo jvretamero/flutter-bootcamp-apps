@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 class MessageComposer extends StatelessWidget {
   final Function(String) onMessage;
+  final bool isLoading;
   final _controller = TextEditingController();
 
   MessageComposer({
     Key? key,
+    required this.isLoading,
     required this.onMessage,
   }) : super(key: key);
 
@@ -20,18 +22,27 @@ class MessageComposer extends StatelessWidget {
           Expanded(
             child: TextField(
               controller: _controller,
+              enabled: !isLoading,
               decoration: kMessageTextFieldDecoration,
             ),
           ),
-          TextButton(
-            onPressed: () {
-              onMessage(_controller.text);
-              _controller.clear();
-            },
-            child: const Text(
-              'Send',
-              style: kSendButtonTextStyle,
-            ),
+          SizedBox(
+            height: 28,
+            child: isLoading
+                ? const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: CircularProgressIndicator(),
+                  )
+                : TextButton(
+                    onPressed: () {
+                      onMessage(_controller.text);
+                      _controller.clear();
+                    },
+                    child: const Text(
+                      'Send',
+                      style: kSendButtonTextStyle,
+                    ),
+                  ),
           ),
         ],
       ),

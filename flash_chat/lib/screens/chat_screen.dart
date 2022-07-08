@@ -17,6 +17,8 @@ class _ChatScreenState extends State<ChatScreen> {
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
 
+  Future _messageFuture = Future.value();
+
   String get _currentUser => _auth.currentUser?.email ?? 'undefined';
 
   @override
@@ -46,14 +48,22 @@ class _ChatScreenState extends State<ChatScreen> {
                 currentUser: _currentUser,
               ),
             ),
-            MessageComposer(
-              onMessage: (message) async {
-                // TODO show indicator
-                await _firestore.collection('messages').add({
-                  'text': message,
-                  'sender': _currentUser,
-                  'date': DateTime.now().toUtc()
-                });
+            FutureBuilder(
+              future: _messageFuture,
+              builder: (context, snapshot) {
+                return MessageComposer(
+                  isLoading:
+                      snapshot.connectionState == ConnectionState.waiting,
+                  onMessage: (message) async {
+                    setState(() {
+                      _messageFuture = _firestore.collection('messages').add({
+                        'text': message,
+                        'sender': _currentUser,
+                        'date': DateTime.now().toUtc()
+                      });
+                    });
+                  },
+                );
               },
             ),
           ],
