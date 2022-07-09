@@ -26,21 +26,25 @@ class MessageComposer extends StatelessWidget {
               decoration: kMessageTextFieldDecoration,
             ),
           ),
-          SizedBox(
-            height: 28,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: isLoading
-                ? const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: CircularProgressIndicator(),
+                ? const SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: Padding(
+                      padding: EdgeInsets.all(8),
+                      child: CircularProgressIndicator(),
+                    ),
                   )
-                : TextButton(
+                : IconButton(
                     onPressed: () {
                       onMessage(_controller.text);
                       _controller.clear();
                     },
-                    child: const Text(
-                      'Send',
-                      style: kSendButtonTextStyle,
+                    icon: const Icon(
+                      Icons.send,
+                      color: Colors.lightBlueAccent,
                     ),
                   ),
           ),
