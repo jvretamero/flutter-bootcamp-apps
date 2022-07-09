@@ -101,3 +101,15 @@ For this project, I did some changes by myself:
 [Source](/flash_chat)
 
 ![Flash Chat welcome screenshot](screenshots/flash_chat_welcome.png) ![Flash Chat login screenshot](screenshots/flash_chat_login.png) ![Flash Chat authenticated screenshot](screenshots/flash_chat_authenticated.png) ![Flash Chat messages screenshot](screenshots/flash_chat_messages.png)
+
+## Todoey
+
+A todo app. This app covers state management.
+
+For this project, I did some changes by myself:
+
+* Added swipe to remove
+* Show a snackbar to let the user undo the removal of a task
+* Show an indicator when adding a task
+
+[Source](/todoey)
