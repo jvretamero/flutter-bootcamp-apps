@@ -37,19 +37,24 @@ class MessageComposer extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     ),
                   )
-                : IconButton(
-                    onPressed: () {
-                      onMessage(_controller.text);
-                      _controller.clear();
-                    },
-                    icon: const Icon(
-                      Icons.send,
-                      color: Colors.lightBlueAccent,
+                : ValueListenableBuilder<TextEditingValue>(
+                    valueListenable: _controller,
+                    builder: (context, value, widget) => IconButton(
+                      onPressed: value.text.isEmpty ? null : _notifyMessage,
+                      icon: const Icon(
+                        Icons.send,
+                        color: Colors.lightBlueAccent,
+                      ),
                     ),
                   ),
           ),
         ],
       ),
     );
+  }
+
+  void _notifyMessage() {
+    onMessage(_controller.text);
+    _controller.clear();
   }
 }
