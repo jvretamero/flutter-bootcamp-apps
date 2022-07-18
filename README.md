@@ -111,5 +111,8 @@ For this project, I did some changes by myself:
 * Added swipe to remove
 * Show a snackbar to let the user undo the removal of a task
 * Show an indicator when adding a task
+* First implemented the persistence layer using [SQFlite](https://pub.dev/packages/sqflite), then switched to [Hive](https://pub.dev/packages/hive)
 
 [Source](/todoey)
+
+![Todoey screenshot](screenshots/todoey1.png) ![Todoey screenshot](screenshots/todoey2.png) ![Todoey screenshot](screenshots/todoey3.png) ![Todoey screenshot](screenshots/todoey4.png)

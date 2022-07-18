@@ -20,7 +20,8 @@ class TasksScreen extends StatelessWidget {
             builder: (context) {
               return SingleChildScrollView(
                 child: Container(
-                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom),
                   child: const AddTaskScreen(),
                 ),
               );
@@ -63,7 +64,8 @@ class TasksScreen extends StatelessWidget {
                     ),
                   ),
                   Consumer<TasksData>(
-                    builder: (BuildContext context, TasksData taskData, Widget? child) {
+                    builder: (BuildContext context, TasksData taskData,
+                        Widget? child) {
                       return Text(
                         '${taskData.count} tasks',
                         style: const TextStyle(
@@ -78,6 +80,7 @@ class TasksScreen extends StatelessWidget {
             ),
             Expanded(
               child: Container(
+                width: double.infinity,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(

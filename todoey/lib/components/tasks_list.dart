@@ -35,7 +35,14 @@ class _TasksListState extends State<TasksList> {
 
         return Consumer<TasksData>(
           builder: (BuildContext context, TasksData taskData, Widget? child) {
-            return _taskListView(taskData);
+            if (taskData.count > 0) {
+              return _taskListView(taskData);
+            } else {
+              return const Text(
+                'Nothing to do...',
+                textAlign: TextAlign.center,
+              );
+            }
           },
         );
       },
@@ -69,7 +76,7 @@ class _TasksListState extends State<TasksList> {
                 .closed;
 
             if (reason != SnackBarClosedReason.action) {
-              await taskData.removeTaskPermanently(removedTask.id);
+              await taskData.removeTaskPermanently(removedTask.key);
             }
           },
         );

@@ -1,31 +1,33 @@
-class Task {
-  final int id;
-  final String title;
-  late bool _isDone;
+import 'package:hive/hive.dart';
 
-  bool get isDone => _isDone;
+@HiveType(typeId: 0)
+class Task extends HiveObject {
+  @HiveField(0)
+  String title = "";
 
-  Task({
-    required this.id,
-    required this.title,
-    bool isDone = false,
-  }) {
-    _isDone = isDone;
-  }
+  @HiveField(1)
+  bool isDone = false;
 
   void toggleDone() {
-    _isDone = !_isDone;
+    isDone = !isDone;
+  }
+}
+
+class TaskAdapter extends TypeAdapter<Task> {
+  @override
+  int get typeId => 0;
+
+  @override
+  Task read(BinaryReader reader) {
+    return Task()
+      ..title = reader.readString()
+      ..isDone = reader.readBool();
   }
 
-  Map<String, dynamic> toMap() => {
-        'id': id,
-        'title': title,
-        'done': _isDone ? 1 : 0,
-      };
-
-  factory Task.fromMap(Map<String, dynamic> map) => Task(
-        id: map['id'],
-        title: map['title'],
-        isDone: map['done'] == 1,
-      );
+  @override
+  void write(BinaryWriter writer, Task obj) {
+    writer
+      ..writeString(obj.title)
+      ..writeBool(obj.isDone);
+  }
 }

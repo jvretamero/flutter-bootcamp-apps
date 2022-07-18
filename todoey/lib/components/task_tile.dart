@@ -15,10 +15,11 @@ class TaskTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        '${task.id} - ${task.title}',
+        '${task.key} - ${task.title}',
         style: TextStyle(
           fontSize: 20,
-          decoration: task.isDone ? TextDecoration.lineThrough : TextDecoration.none,
+          decoration:
+              task.isDone ? TextDecoration.lineThrough : TextDecoration.none,
         ),
       ),
       trailing: Checkbox(
